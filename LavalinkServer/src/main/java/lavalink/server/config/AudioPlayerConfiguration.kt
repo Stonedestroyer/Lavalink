@@ -15,6 +15,8 @@ import com.sedmelluq.discord.lavaplayer.source.twitch.TwitchStreamAudioSourceMan
 import com.sedmelluq.discord.lavaplayer.source.vimeo.VimeoAudioSourceManager
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import com.sedmelluq.lava.extensions.youtuberotator.YoutubeIpRotatorSetup
+import lavalink.server.pornhub.PornHubAudioSourceManager
+import com.sedmelluq.lava.extensions.youtuberotator.YoutubeIpRotator
 import com.sedmelluq.lava.extensions.youtuberotator.planner.AbstractRoutePlanner
 import com.sedmelluq.lava.extensions.youtuberotator.planner.BalancingIpRoutePlanner
 import com.sedmelluq.lava.extensions.youtuberotator.planner.NanoIpRoutePlanner
@@ -27,7 +29,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.net.InetAddress
 import java.util.function.Predicate
-import java.util.function.Supplier
 
 /**
  * Created by napster on 05.03.18.
@@ -90,6 +91,7 @@ class AudioPlayerConfiguration {
         if (sources.isMixer) audioPlayerManager.registerSourceManager(BeamAudioSourceManager())
         if (sources.isHttp) audioPlayerManager.registerSourceManager(HttpAudioSourceManager())
         if (sources.isLocal) audioPlayerManager.registerSourceManager(LocalAudioSourceManager())
+        if (sources.isPornhuh) audioPlayerManager.registerSourceManager(PornHubAudioSourceManager())
 
         audioPlayerManager.configuration.isFilterHotSwapEnabled = true
 
