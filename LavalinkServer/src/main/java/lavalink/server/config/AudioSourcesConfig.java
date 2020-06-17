@@ -16,6 +16,7 @@ public class AudioSourcesConfig {
     private boolean twitch = true;
     private boolean vimeo = true;
     private boolean mixer = true;
+    private boolean pornhub = true;
     private boolean http = true;
     private boolean local = false;
 
@@ -65,6 +66,14 @@ public class AudioSourcesConfig {
 
     public void setMixer(boolean mixer) {
         this.mixer = mixer;
+    }
+
+    public boolean isPornhub() {
+        return pornhub;
+    }
+
+    public void setPornhub(boolean pornhub) {
+        this.pornhub = pornhub;
     }
 
     public boolean isHttp() {
