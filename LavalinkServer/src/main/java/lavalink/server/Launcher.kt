@@ -70,7 +70,7 @@ object Launcher {
             }
             appendln()
             append("${indentation}Version:        "); appendln(version)
-            append("${indentation}Build:          "); appendln("1091-PH-MANAGER-LP-1.3.52-DEVO")
+            append("${indentation}Build:          "); appendln("1096-PH-MANAGER-LP-1.3.52-DEVO")
             if (gitRepoState.isLoaded) {
                 append("${indentation}Build time:     "); appendln(buildTime)
                 append("${indentation}Branch          "); appendln(gitRepoState.branch)
