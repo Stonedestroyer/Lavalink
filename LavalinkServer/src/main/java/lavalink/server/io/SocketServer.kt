@@ -44,7 +44,6 @@ class SocketServer(
 ) : TextWebSocketHandler() {
 
     // userId <-> shardCount
-    private val shardCounts = ConcurrentHashMap<String, Int>()
     val contextMap = ConcurrentHashMap<String, SocketContext>()
     @Suppress("LeakingThis")
     private val handlers = WebSocketHandlers(contextMap)
@@ -68,11 +67,10 @@ class SocketServer(
         get() = contextMap.values
 
     override fun afterConnectionEstablished(session: WebSocketSession) {
-        val shardCount = Integer.parseInt(session.handshakeHeaders.getFirst("Num-Shards")!!)
         val userId = session.handshakeHeaders.getFirst("User-Id")!!
         val resumeKey = session.handshakeHeaders.getFirst("Resume-Key")
-
-        shardCounts[userId] = shardCount
+        val clientName = session.handshakeHeaders.getFirst("Client-Name")
+        val userAgent = session.handshakeHeaders.getFirst("User-Agent")
 
         var resumable: SocketContext? = null
         if (resumeKey != null) resumable = resumableSessions.remove(resumeKey)
@@ -84,8 +82,6 @@ class SocketServer(
             return
         }
 
-        shardCounts[userId] = shardCount
-
         contextMap[session.id] = SocketContext(
                 audioPlayerManager,
                 serverConfig,
@@ -94,7 +90,13 @@ class SocketServer(
                 userId,
                 koe.newClient(userId.toLong())
         )
-        log.info("Connection successfully established from " + session.remoteAddress!!)
+
+        if (clientName != null) {
+            log.info("Connection successfully established from $clientName")
+        } else {
+            log.info("Connection successfully established")
+            log.warn("Library developers: Please specify a 'Client-Name' header. User agent: $userAgent")
+        }
     }
 
     override fun afterConnectionClosed(session: WebSocketSession?, status: CloseStatus?) {

@@ -46,8 +46,8 @@ the JDA client takes advantage of JDA's websocket write thread to send OP 4s for
 When opening a websocket connection, you must supply 3 required headers:
 ```
 Authorization: Password matching the server config
-Num-Shards: Total number of shards your bot is operating on
 User-Id: The user id of the bot you are playing music with
+Client-Name: The name of your client
 ```
 
 ### Outgoing messages
@@ -86,7 +86,7 @@ If `pause` is set to true, the playback will be paused. This is an optional fiel
     "endTime": "120000",
     "volume": "100",
     "noReplace": false,
-    "pause": false,
+    "pause": false
 }
 ```
 
