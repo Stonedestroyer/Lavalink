@@ -5,7 +5,6 @@ All credits goes to Devoxin: https://github.com/Devoxin/JukeBot/tree/master/src/
 package lavalink.server.sources.pornhub
 
 object Utils {
-
     //private val assignmentPattern = "(var.+?media_0[^<]+)".toPattern()
     //private val assignmentPattern = "(var.+?media_0.+)".toPattern()
 
@@ -34,9 +33,9 @@ object Utils {
         val formats = vars.filter { it.key.startsWith("media") || it.key.startsWith("quality_") }
 
         return formats["quality_720p"]
-                ?: formats["quality_480p"]
-                ?: formats["quality_240p"]
-                ?: throw IllegalStateException("No formats detected")
+            ?: formats["quality_480p"]
+            ?: formats["quality_240p"]
+            ?: throw IllegalStateException("No formats detected")
     }
 
     fun extractAssignments(script: String): List<String> {
@@ -64,7 +63,6 @@ object Utils {
         }
 
         return v[cleaned]
-                ?: cleaned.replace("'", "").replace("\"", "")
+            ?: cleaned.replace("'", "").replace("\"", "")
     }
-
 }

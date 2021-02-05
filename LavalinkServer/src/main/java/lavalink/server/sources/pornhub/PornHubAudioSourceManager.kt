@@ -4,6 +4,7 @@ All credits goes to Devoxin: https://github.com/Devoxin/JukeBot/tree/master/src/
 
 package lavalink.server.sources.pornhub
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager
 import com.sedmelluq.discord.lavaplayer.tools.ExceptionTools
@@ -35,20 +36,21 @@ class PornHubAudioSourceManager : AudioSourceManager, HttpConfigurable {
 
     override fun getSourceName() = "pornhub"
 
-    override fun loadItem(manager: DefaultAudioPlayerManager, reference: AudioReference): AudioItem? {
-        if (!VIDEO_REGEX.matcher(reference.identifier).matches() && !reference.identifier.startsWith(VIDEO_SEARCH_PREFIX))
-            return null
-
-        if (reference.identifier.startsWith(VIDEO_SEARCH_PREFIX)) {
-            return searchForVideos(reference.identifier.substring(VIDEO_SEARCH_PREFIX.length).trim())
+    override fun loadItem(manager: AudioPlayerManager?, reference: AudioReference?): AudioItem? {
+        if (reference != null) {
+            if (!VIDEO_REGEX.matcher(reference.identifier).matches() && !reference.identifier.startsWith(VIDEO_SEARCH_PREFIX))
+                return null
+            if (reference.identifier.startsWith(VIDEO_SEARCH_PREFIX)) {
+                return searchForVideos(reference.identifier.substring(VIDEO_SEARCH_PREFIX.length).trim())
+            }
         }
 
         return try {
-            loadItemOnce(reference)
+            loadItemOnce(reference!!)
         } catch (exception: FriendlyException) {
             // In case of a connection reset exception, try once more.
             if (HttpClientTools.isRetriableNetworkException(exception.cause)) {
-                loadItemOnce(reference)
+                loadItemOnce(reference!!)
             } else {
                 throw exception
             }
@@ -97,8 +99,8 @@ class PornHubAudioSourceManager : AudioSourceManager, HttpConfigurable {
 
     private fun searchForVideos(query: String): AudioItem {
         val uri = URIBuilder("https://www.pornhub.com/video/search")
-                .addParameter("search", query)
-                .build()
+            .addParameter("search", query)
+            .build()
 
         makeHttpRequest(HttpGet(uri)).use {
             val statusCode = it.statusLine.statusCode
@@ -112,12 +114,12 @@ class PornHubAudioSourceManager : AudioSourceManager, HttpConfigurable {
 
             val document = Jsoup.parse(it.entity.content, StandardCharsets.UTF_8.name(), "https://pornhub.com")
             val videos = document.getElementsByClass("wrap")
-                    .filter { elem ->
-                        !elem.select("div.thumbnail-info-wrapper span.title a")
-                                .first()
-                                .attr("href")
-                                .contains("playlist")
-                    }
+                .filter { elem ->
+                    !elem.select("div.thumbnail-info-wrapper span.title a")
+                        .first()
+                        .attr("href")
+                        .contains("playlist")
+                }
 
             if (videos.isEmpty()) {
                 return AudioReference.NO_TRACK
@@ -161,8 +163,8 @@ class PornHubAudioSourceManager : AudioSourceManager, HttpConfigurable {
 
     private fun buildTrackObject(uri: String, identifier: String, title: String, uploader: String, isStream: Boolean, duration: Long): PornHubAudioTrack {
         return PornHubAudioTrack(
-                AudioTrackInfo(title, uploader, duration, identifier, isStream, uri),
-                this
+            AudioTrackInfo(title, uploader, duration, identifier, isStream, uri),
+            this
         )
     }
 
@@ -183,5 +185,4 @@ class PornHubAudioSourceManager : AudioSourceManager, HttpConfigurable {
         private val VIDEO_INFO_REGEX = Pattern.compile("var flashvars_\\d{7,9} = (\\{.+})")
         private const val VIDEO_SEARCH_PREFIX = "phsearch:"
     }
-
 }
