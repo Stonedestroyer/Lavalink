@@ -40,7 +40,7 @@ dependencies {
     }
     compile group: 'moe.kyokobot.koe', name: 'ext-udpqueue', version: koeVersion
 //    compile group: 'com.sedmelluq', name: 'lavaplayer', version: lavaplayerVersion
-    compile group: 'com.github.PredaaA', name: 'lavaplayer', version: '5e8e6b9719'
+    compile group: 'com.github.PredaaA', name: 'lavaplayer', version: '87b2c34f4d'
     compile group: 'com.sedmelluq', name: 'lavaplayer-ext-youtube-rotator', version: lavaplayerIpRotatorVersion
     compile group: 'com.github.natanbc', name: 'lavadsp', version: lavaDspVersion
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlinVersion
