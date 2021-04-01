@@ -70,7 +70,7 @@ object Launcher {
             }
             appendln()
             append("${indentation}Version:        "); appendln(version)
-            append("${indentation}Build:          "); appendln("1215-PHMANAGER-LP#604")
+            append("${indentation}Build:          "); appendln("1215-PHMANAGER-LP#604-LP#605")
             if (gitRepoState.isLoaded) {
                 append("${indentation}Build time:     "); appendln(buildTime)
                 append("${indentation}Branch          "); appendln(gitRepoState.branch)
