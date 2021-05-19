@@ -15,7 +15,8 @@ class KoeConfiguration(val serverConfig: ServerConfig) {
     @Bean
     fun koeOptions(): KoeOptions = KoeOptions.builder().apply {
         log.info("OS: " + System.getProperty("os.name") + ", Arch: " + System.getProperty("os.arch"))
-
+        val jdaenabled = serverConfig.jdanas ?: true
+        if(jdaenabled) {
         log.info("Enabling JDA-NAS")
         var bufferSize = serverConfig.bufferDurationMs ?: UdpQueueFramePollerFactory.DEFAULT_BUFFER_DURATION
         if (bufferSize <= 0) {
@@ -24,5 +25,9 @@ class KoeConfiguration(val serverConfig: ServerConfig) {
             bufferSize = UdpQueueFramePollerFactory.DEFAULT_BUFFER_DURATION
         }
         setFramePollerFactory(UdpQueueFramePollerFactory(bufferSize, Runtime.getRuntime().availableProcessors()))
+        }
+        else {
+            log.info("JDA-NAS is disabled")
+    }
     }.create()
 }
