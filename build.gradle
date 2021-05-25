@@ -29,7 +29,7 @@ allprojects {
         jcenter()                          // JDA and some other stuff
         mavenLocal()                       // useful for developing
         maven { url "https://jitpack.io" } // build projects directly from github
-        maven { url 'https://dl.bintray.com/sedmelluq/com.sedmelluq' }
+        maven { url 'https://m2.dv8tion.net/releases' }
     }
 
     group = 'lavalink'
@@ -53,8 +53,8 @@ subprojects {
 
     ext {
         //@formatter:off
-        
-        lavaplayerVersion               = '1.3.76'
+
+        lavaplayerVersion               = '1.3.77'
         lavaplayerIpRotatorVersion      = '0.2.3'
         jdaNasVersion                   = '1.1.0'
         jappVersion                     = '1.3.2-MINN'
@@ -65,7 +65,6 @@ subprojects {
         springWebSocketVersion          = '5.1.9.RELEASE'
         logbackVersion                  = '1.2.3'
         sentryLogbackVersion            = '1.7.7'
-        oshiVersion                     = '3.13.3'
         jsonOrgVersion                  = '20180813'
         spotbugsAnnotationsVersion      = '3.1.6'
         prometheusVersion               = '0.5.0'
