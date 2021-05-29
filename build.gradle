@@ -71,6 +71,7 @@ subprojects {
         prometheusVersion               = '0.5.0'
         commonsLangVersion              = '3.8'
         gsonVersion                     = '2.8.5'
+        jsoupVersion                    = '1.13.1'
 
         //@formatter:on
     }
