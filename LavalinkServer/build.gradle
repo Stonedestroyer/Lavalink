@@ -10,7 +10,6 @@ apply plugin: "com.adarshr.test-logger"
 
 description = 'Play audio to discord voice channels'
 mainClassName = "lavalink.server.Launcher"
-version = "${versionFromTag()}".toString()
 ext {
     moduleName = 'Lavalink-Server'
 }
@@ -79,6 +78,8 @@ dependencies {
     compile group: 'io.prometheus', name: 'simpleclient_servlet', version: prometheusVersion
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
 }
+version = "3.3.2.5".toString() // TODO: When I can be bothered automate this to match Freya's version automatically.
+def buildNumber = (System.getenv('CI') ? System.getenv('BUILD_NUMBER') : '1237')
 
 processResources {
     //inject values into app.properties
@@ -87,7 +88,7 @@ processResources {
                 "project.version"   : project.version,
                 "project.groupId"   : project.group,
                 "project.artifactId": project.ext.moduleName,
-                "env.BUILD_NUMBER"  : (System.getenv('CI') ? System.getenv('BUILD_NUMBER') : '1235'),
+                "env.BUILD_NUMBER"  : buildNumber,
                 "env.BUILD_TIME"    : System.currentTimeMillis() + ''
         ]
     }
@@ -95,9 +96,20 @@ processResources {
 
 build {
     doLast {
-        println 'Version: ' + version
+        println 'Version: ' + version;
+
+        println 'Making Release: ' + version + "_" + buildNumber;
+
+        exec {
+            if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+                commandLine 'cmd','/c','start', 'cmd.exe' ,'@cmd' , '/c', 'C:\\Users\\guyre\\.virtualenvs\\39\\GitUtils\\Scripts\\python.exe', 'C:\\Users\\guyre\\PycharmProjects\\GitUtils\\main.py'
+            } else {
+                commandLine 'sh', '-c', 'jarupload'
+            }
+        }
     }
 }
+
 
 compileKotlin {
     kotlinOptions {
