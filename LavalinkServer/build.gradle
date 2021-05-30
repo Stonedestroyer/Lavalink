@@ -87,7 +87,7 @@ processResources {
                 "project.version"   : project.version,
                 "project.groupId"   : project.group,
                 "project.artifactId": project.ext.moduleName,
-                "env.BUILD_NUMBER"  : (System.getenv('CI') ? System.getenv('BUILD_NUMBER') : '1237'),
+                "env.BUILD_NUMBER"  : (System.getenv('CI') ? System.getenv('BUILD_NUMBER') : '1235'),
                 "env.BUILD_TIME"    : System.currentTimeMillis() + ''
         ]
     }
@@ -125,7 +125,7 @@ String versionFromTag() {
         println("Git state is dirty, setting version as snapshot")
     }
 
-    if (headTag && clean) {
+    if (headTag) {
         headTag.getName()
     } else {
         "${grgit.head().id}-SNAPSHOT"
