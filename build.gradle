@@ -29,7 +29,7 @@ allprojects {
         jcenter()                          // JDA and some other stuff
         mavenLocal()                       // useful for developing
         maven { url "https://jitpack.io" } // build projects directly from github
-        maven { url 'https://m2.dv8tion.net/releases' }
+        maven { url 'https://dl.bintray.com/sedmelluq/com.sedmelluq' }
     }
 
     group = 'lavalink'
@@ -65,6 +65,7 @@ subprojects {
         springWebSocketVersion          = '5.1.9.RELEASE'
         logbackVersion                  = '1.2.3'
         sentryLogbackVersion            = '1.7.7'
+        oshiVersion                     = '3.13.3'
         jsonOrgVersion                  = '20180813'
         spotbugsAnnotationsVersion      = '3.1.6'
         prometheusVersion               = '0.5.0'
