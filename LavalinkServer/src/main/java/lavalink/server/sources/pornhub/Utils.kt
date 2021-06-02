@@ -1,4 +1,5 @@
 /* Credits to Devoxin: https://github.com/Devoxin/JukeBot/tree/master/src/main/java/jukebot/audio/sourcemanagers/pornhub */
+
 package lavalink.server.sources.pornhub
 
 object Utils {
