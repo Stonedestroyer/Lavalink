@@ -1,5 +1,6 @@
 package lavalink.server.sources.pornhub
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager
 import com.sedmelluq.discord.lavaplayer.tools.ExceptionTools
@@ -31,20 +32,21 @@ class PornHubAudioSourceManager : AudioSourceManager, HttpConfigurable {
 
     override fun getSourceName() = "pornhub"
 
-    override fun loadItem(manager: DefaultAudioPlayerManager, reference: AudioReference): AudioItem? {
-        if (!VIDEO_REGEX.matcher(reference.identifier).matches() && !reference.identifier.startsWith(VIDEO_SEARCH_PREFIX))
-            return null
-
-        if (reference.identifier.startsWith(VIDEO_SEARCH_PREFIX)) {
-            return searchForVideos(reference.identifier.substring(VIDEO_SEARCH_PREFIX.length).trim())
+    override fun loadItem(manager: AudioPlayerManager?, reference: AudioReference?): AudioItem? {
+        if (reference != null) {
+            if (!VIDEO_REGEX.matcher(reference.identifier).matches() && !reference.identifier.startsWith(VIDEO_SEARCH_PREFIX))
+                return null
+            if (reference.identifier.startsWith(VIDEO_SEARCH_PREFIX)) {
+                return searchForVideos(reference.identifier.substring(VIDEO_SEARCH_PREFIX.length).trim())
+            }
         }
 
         return try {
-            loadItemOnce(reference)
+            loadItemOnce(reference!!)
         } catch (exception: FriendlyException) {
             // In case of a connection reset exception, try once more.
             if (HttpClientTools.isRetriableNetworkException(exception.cause)) {
-                loadItemOnce(reference)
+                loadItemOnce(reference!!)
             } else {
                 throw exception
             }
