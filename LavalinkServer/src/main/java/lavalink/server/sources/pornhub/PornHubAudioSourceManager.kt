@@ -5,7 +5,6 @@ All credits goes to Devoxin: https://github.com/Devoxin/JukeBot/tree/master/src/
 package lavalink.server.sources.pornhub
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager
-import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager
 import com.sedmelluq.discord.lavaplayer.tools.ExceptionTools
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException
@@ -25,7 +24,6 @@ import java.io.DataInput
 import java.io.DataOutput
 import java.io.IOException
 import java.nio.charset.StandardCharsets
-import java.util.*
 import java.util.function.Consumer
 import java.util.function.Function
 import java.util.regex.Pattern
