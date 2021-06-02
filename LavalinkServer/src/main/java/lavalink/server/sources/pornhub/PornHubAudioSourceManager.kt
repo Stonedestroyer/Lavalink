@@ -1,4 +1,4 @@
-package lavalink.server.pornhub
+package lavalink.server.sources.pornhub
 
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager
