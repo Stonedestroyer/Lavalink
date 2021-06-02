@@ -30,7 +30,6 @@ import java.net.InetAddress
 import java.util.function.Predicate
 import java.util.function.Supplier
 
-
 /**
  * Created by napster on 05.03.18.
  */
