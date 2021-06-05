@@ -37,7 +37,7 @@ public class InfoRestHandler {
         log.info("GET " + path);
     }
 
-    @GetMapping("/metadata", produces = "application/json")
+    @GetMapping(value="/metadata", produces = "application/json")
     @ResponseBody
     public ResponseEntity<String> getMetaData(HttpServletRequest request) {
 
