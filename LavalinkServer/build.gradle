@@ -53,6 +53,8 @@ dependencies {
     implementation name: 'udp-queue', version: '1.1.0'
     implementation name: 'native-loader', version: '0.7.0'
 
+    /* PH Source */
+    implementation 'org.jsoup:jsoup:1.13.1'
 
     compile (group: 'moe.kyokobot.koe', name: 'core', version: koeVersion) {
         // This version of SLF4J does not recognise Logback 1.2.3
