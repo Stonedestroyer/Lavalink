@@ -11,6 +11,7 @@ lavalink:
       twitch: true
       vimeo: true
       mixer: true
+      pornhub: false
       http: true
       local: false
     bufferDurationMs: 400 # The duration of the NAS buffer. Higher values fare better against longer GC pauses
