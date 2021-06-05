@@ -18,7 +18,6 @@ public class AudioSourcesConfig {
     private boolean mixer = true;
     private boolean http = true;
     private boolean local = false;
-    private boolean pornhub = false;
 
     public boolean isYoutube() {
         return youtube;
@@ -83,8 +82,4 @@ public class AudioSourcesConfig {
     public void setLocal(boolean local) {
         this.local = local;
     }
-
-    public boolean isPornhuh() { return pornhub;}
-
-    public void setPornhub(boolean local) { this.pornhub = local;}
 }
