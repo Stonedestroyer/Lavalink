@@ -106,7 +106,12 @@ build {
         if (System.getProperty("user.name").toLowerCase(Locale.ROOT) == "draper" & System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows'))  { /* Only try to run the build script if logged in as Draper and on Windows*/
             println 'Making Release: ' + version + "_" + buildNumber;
             exec {
-                commandLine 'cmd','/c','start', 'cmd.exe' ,'@cmd' , '/c', 'C:\\Users\\guyre\\.virtualenvs\\39\\GitUtils\\Scripts\\python.exe', 'C:\\Users\\guyre\\PycharmProjects\\GitUtils\\main.py'
+                commandLine 'cmd','/c','start', 'cmd.exe' ,'@cmd' , '/c',
+                        'C:\\Users\\Draper\\.virtualenv\\global\\Scripts\\python.exe',
+                        'C:\\Users\\guyre\\PycharmProjects\\GitUtils\\main.py',
+                        '--version', version,
+//                        '--pre-release',
+                        '--build', buildNumber
             }
         }
     }
