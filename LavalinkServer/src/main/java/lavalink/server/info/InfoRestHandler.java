@@ -1,24 +1,16 @@
 package lavalink.server.info;
 
 import com.sedmelluq.discord.lavaplayer.tools.PlayerLibrary;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
-import lavalink.server.player.AudioLoaderRestHandler;
-import lavalink.server.player.ResultStatus;
-import lavalink.server.util.Util;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
