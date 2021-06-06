@@ -85,7 +85,7 @@ dependencies {
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
 }
 version = "3.3.2.5".toString() /* TODO: When I can be bothered automate this to match Freya's version automatically. */
-def buildNumber = (System.getenv('CI') ? System.getenv('BUILD_NUMBER') : '1243')
+def buildNumber = (System.getenv('CI') ? System.getenv('BUILD_NUMBER') : '1247')
 
 processResources {
     //inject values into app.properties
@@ -106,7 +106,12 @@ build {
         if (System.getProperty("user.name").toLowerCase(Locale.ROOT) == "draper" & System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows'))  { /* Only try to run the build script if logged in as Draper and on Windows*/
             println 'Making Release: ' + version + "_" + buildNumber;
             exec {
-                commandLine 'cmd','/c','start', 'cmd.exe' ,'@cmd' , '/c', 'C:\\Users\\guyre\\.virtualenvs\\39\\GitUtils\\Scripts\\python.exe', 'C:\\Users\\guyre\\PycharmProjects\\GitUtils\\main.py'
+                commandLine 'cmd','/c','start', 'cmd.exe' ,'@cmd' , '/c',
+                        'C:\\Users\\Draper\\.virtualenv\\global\\Scripts\\python.exe',
+                        'C:\\Users\\Draper\\PycharmProjects\\GitUtils\\main.py',
+                        '--version', version,
+//                        '--pre-release',
+                        '--build', buildNumber
             }
         }
     }
